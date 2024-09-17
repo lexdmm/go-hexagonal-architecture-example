@@ -1,5 +1,11 @@
 # Arquitetura Hexagonal
 
+## Running
+Rodar o projeto
+```	
+docker compose up -d
+```
+
 ## Testes
 Rodar todos os testes
 ```
@@ -33,7 +39,7 @@ type ProductPersistenceInterface interface {
 
 ```
 
-Agora o service fara exatamente o que a interface manda fazendo uma injeção de dependencia, onde eu não sei o banco, como ele faz o get, apenas que existe um método Get que retorne o que desejo:
+Agora o service fara exatamente o que a interface manda fazendo uma injeção de dependencia, onde eu não sei o banco, como ele faz o get. Tudo que sei é apenas que existe um método Get que retorne o que desejo:
 *application/product_service.go*
 ```	
 type ProductService struct {
