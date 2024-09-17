@@ -1,11 +1,12 @@
 package application_test
 
 import (
+	"testing"
+
 	"github.com/codeedu/go-hexagonal/application"
 	mock_application "github.com/codeedu/go-hexagonal/application/mocks"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
-	"testing"
 )
 
 func TestProductService_Get(t *testing.T) {
@@ -16,7 +17,7 @@ func TestProductService_Get(t *testing.T) {
 	persistence.EXPECT().Get(gomock.Any()).Return(product, nil).AnyTimes()
 	service := application.ProductService{Persistence: persistence}
 
-	result, err := service.Get("abc")
+	result, err := service.Get("id1")
 	require.Nil(t, err)
 	require.Equal(t, product, result)
 
