@@ -1,14 +1,15 @@
 package server
 
 import (
-	"github.com/codeedu/go-hexagonal/adapters/web/handler"
-	"github.com/codeedu/go-hexagonal/application"
-	"github.com/codegangsta/negroni"
-	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"os"
 	"time"
+
+	"github.com/codeedu/go-hexagonal/adapters/web/handler"
+	"github.com/codeedu/go-hexagonal/application"
+	"github.com/codegangsta/negroni"
+	"github.com/gorilla/mux"
 )
 
 type Webserver struct {
@@ -20,7 +21,9 @@ func MakeNewWebserver() *Webserver {
 }
 
 func (w Webserver) Serve() {
+	// recuros de router http porque no go não tem
 	r := mux.NewRouter()
+	// é um middleware de log para registrar toda requisiçao que vier
 	n := negroni.New(
 		negroni.NewLogger(),
 	)

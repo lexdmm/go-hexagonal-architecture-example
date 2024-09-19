@@ -14,12 +14,15 @@ func MakeProductHandlers(r *mux.Router, n *negroni.Negroni, service application.
 	r.Handle("/product/{id}/enable", n.With(
 		negroni.Wrap(enableProduct(service)),
 	)).Methods("PUT", "OPTIONS")
+
 	r.Handle("/product/{id}/disable", n.With(
 		negroni.Wrap(disableProduct(service)),
 	)).Methods("PUT", "OPTIONS")
+
 	r.Handle("/product/{id}", n.With(
 		negroni.Wrap(getProduct(service)),
 	)).Methods("GET", "OPTIONS")
+
 	r.Handle("/product", n.With(
 		negroni.Wrap(createProduct(service)),
 	)).Methods("POST", "OPTIONS")
@@ -35,7 +38,7 @@ func getProduct(service application.ProductServiceInterface) http.Handler {
 			w.WriteHeader(http.StatusNotFound)
 			return
 		}
-		err = json.NewEncoder(w).Encode(product)
+		err = json.NewEncoder(w).Encode(product) // transformando em json
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 			return
